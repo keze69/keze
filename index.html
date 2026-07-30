@@ -42,18 +42,12 @@
             padding: 1rem;
         }
 
-        .pfp {
+        .pfp img {
             width: 100%;
-            aspect-ratio: 1;
+            height: 100%;
+            object-fit: cover;
+            display: block;
             border-radius: 8px;
-            border: 1px solid #999;
-            background: linear-gradient(135deg, #ccc, #ddd, #bbb);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            margin-bottom: 0.875rem;
-            overflow: hidden;
         }
 
         .profile-text {
@@ -389,7 +383,9 @@
         <!-- LEFT COLUMN -->
         <aside class="card">
             <div class="left-inner">
-                <div class="pfp">?</div>
+                <div class="pfp">
+                <img src="https://picsum.photos/400" alt="Keze">
+                </div>
                 <div class="profile-text">
                     Hey! so u came from the link? well then goodluck reading about me :)
                 </div>
