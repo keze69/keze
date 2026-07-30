@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>keze</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #e8e8e8;
+            color: #111;
+            line-height: 1.5;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 780px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        /* Cards */
+        .card {
+            background: #f2f2f2;
+            border-radius: 10px;
+            border: 1px solid #c0c0c0;
+            overflow: hidden;
+        }
+
+        /* Left Column */
+        .left-inner {
+            padding: 1rem;
+        }
+
+        .pfp {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 8px;
+            border: 1px solid #999;
+            background: linear-gradient(135deg, #ccc, #ddd, #bbb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 0.875rem;
+            overflow: hidden;
+        }
+
+        .profile-text {
+            font-size: 0.85rem;
+            line-height: 1.55;
+            margin-bottom: 0.875rem;
+            color: #111;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 0.625rem;
+            border-radius: 6px;
+            border: 1px solid #aaa;
+            background: linear-gradient(to bottom, #e8e8e8, #d8d8d8);
+            color: #111;
+            font-size: 0.8rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 0.4rem;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 1px rgba(0,0,0,0.08);
+            transition: all 0.1s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
+        }
+
+        .btn:active {
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.12);
+            transform: translateY(0.5px);
+        }
+
+        .footer-link {
+            display: block;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #777;
+            margin-top: 0.625rem;
+            line-height: 1.4;
+        }
+
+        .footer-link a {
+            color: #555;
+            text-decoration: underline;
+            text-underline-offset: 1px;
+        }
+
+        /* Right Column */
+        .right-inner {
+            padding: 1.25rem;
+        }
+
+        .section-header {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.875rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 2px solid #111;
+            letter-spacing: -0.01em;
+        }
+
+        .intro-text {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* Content Blocks */
+        .content-block {
+            margin-bottom: 1.25rem;
+        }
+
+        .content-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .block-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.55rem;
+            background: #e8e8e8;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.78rem;
+            color: #444;
+        }
+
+        .simple-list {
+            list-style: none;
+        }
+
+        .simple-list li {
+            padding: 0.25rem 0;
+            font-size: 0.84rem;
+            color: #444;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .simple-list li:last-child {
+            border-bottom: none;
+        }
+
+        .warning-list, .effects-list {
+            list-style: none;
+        }
+
+        .warning-list li, .effects-list li {
+            padding: 0.25rem 0;
+            font-size: 0.84rem;
+            color: #555;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+        }
+
+        .info-pill {
+            padding: 0.4rem 0.5rem;
+            background: #e8e8e8;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.78rem;
+            color: #555;
+            text-align: center;
+        }
+
+        .quote-box {
+            background: #e8e8e8;
+            border-left: 3px solid #999;
+            padding: 0.625rem 0.875rem;
+            margin-bottom: 0.5rem;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.84rem;
+            font-style: italic;
+            color: #555;
+        }
+
+        .achievement-box {
+            background: #111;
+            color: #f2f2f2;
+            padding: 0.875rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .achievement-box .ach-title {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            opacity: 0.5;
+            margin-bottom: 0.15rem;
+        }
+
+        .achievement-box .ach-desc {
+            font-size: 0.84rem;
+            font-weight: 500;
+        }
+
+        /* Status */
+        .status-box {
+            background: #e8e8e8;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 0.75rem;
+            text-align: center;
+            font-family: "Courier New", monospace;
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .status-box .wifi {
+            display: inline-block;
+            animation: shake 0.5s ease infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-1.5px); }
+            75% { transform: translateX(1.5px); }
+        }
+
+        /* Gallery Toggle */
+        .gallery-toggle {
+            width: 100%;
+            padding: 0.5rem 0.625rem;
+            background: linear-gradient(to bottom, #e8e8e8, #d8d8d8);
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #111;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 1px 1px rgba(0,0,0,0.08);
+            transition: all 0.1s ease;
+            margin-bottom: 0.625rem;
+        }
+
+        .gallery-toggle:hover {
+            background: linear-gradient(to bottom, #e0e0e0, #d0d0d0);
+        }
+
+        .gallery-toggle:active {
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.12);
+            transform: translateY(0.5px);
+        }
+
+        .gallery-toggle .arrow {
+            transition: transform 0.3s ease;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .gallery-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .gallery-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .gallery-content.open {
+            max-height: 600px;
+            opacity: 1;
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.4rem;
+        }
+
+        .photo-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #bbb;
+            cursor: pointer;
+            transition: transform 0.15s ease;
+            background: #ccc;
+        }
+
+        .photo-grid img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 2rem;
+        }
+
+        #lightboxImg {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 6px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        /* Page Footer */
+        .page-footer {
+            max-width: 780px;
+            margin: 1rem auto 0;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #999;
+        }
+
+        /* Mobile */
+        @media (max-width: 680px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 0.875rem;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .photo-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- LEFT COLUMN -->
+        <aside class="card">
+            <div class="left-inner">
+                <div class="pfp">?</div>
+                <div class="profile-text">
+                    Hey! sp u came from the link? well then goodluck reading about me :)
+                </div>
+                <a href="#info" class="btn">More about Info</a>
+                <a href="#contact" class="btn">Tap me to teleport you to gallery page</a>
+                <div class="footer-link">
+                    see any inappropriate content? not my fault lol<a href="#">block or report? nah get stuck here</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- RIGHT COLUMN -->
+        <main class="card" id="info">
+            <div class="right-inner">
+                <div class="section-header">info and terms of services !</div>
+
+                <p class="intro-text">
+                    Before Reading Please Understand: this website contains premium nonsense, dangerous levels of silliness, sleep deprivation, random brainrot, emotionally unstable humor, and catastrophic tomfoolery. Proceed at your own risk.
+                </p>
+
+                <!-- About Me -->
+                <div class="content-block">
+                    <div class="block-title">About Me</div>
+                    <div class="tag-list">
+                        <span class="tag">professionally unserious</span>
+                        <span class="tag">certified overthinker</span>
+                        <span class="tag">part time menace</span>
+                        <span class="tag">full time goofy specimen</span>
+                        <span class="tag">spiritually exhausted</span>
+                        <span class="tag">mentally AFK most of the time</span>
+                        <span class="tag">emotionally sponsored by music and late night thoughts</span>
+                    </div>
+                </div>
+
+                <!-- Daily Routine -->
+                <div class="content-block">
+                    <div class="block-title">Daily Routine</div>
+                    <ul class="simple-list">
+                        <li>wake up</li>
+                        <li>check phone</li>
+                        <li>stare at wall</li>
+                        <li>watch reels</li>
+                        <li>become delusional</li>
+                        <li>eat something random</li>
+                        <li>send memes</li>
+                        <li>disappear mysteriously</li>
+                        <li>repeat</li>
+                    </ul>
+                </div>
+
+                <!-- Skills -->
+                <div class="content-block">
+                    <div class="block-title">Skills</div>
+                    <ul class="simple-list">
+                        <li>replying instantly then vanishing for 8 business days</li>
+                        <li>opening fridge every 12 minutes</li>
+                        <li>surviving on pure aura</li>
+                        <li>laughing at the dumbest things imaginable</li>
+                        <li>creating fake scenarios before sleeping</li>
+                        <li>acting mysterious for absolutely no reason</li>
+                        <li>making situations worse accidentally</li>
+                        <li>procrastinating with elite performance</li>
+                    </ul>
+                </div>
+
+                <!-- Current Status -->
+                <div class="content-block">
+                    <div class="block-title">My Current Status</div>
+                    <div class="status-box">
+                        loading...<br>
+                        still loading...<br>
+                        <span class="wifi">bro the wifi sucks</span>
+                    </div>
+                </div>
+
+                <!-- Things I Enjoy -->
+                <div class="content-block">
+                    <div class="block-title">Things I Enjoy</div>
+                    <div class="tag-list">
+                        <span class="tag">music that destroys my mental stability</span>
+                        <span class="tag">random memes at 3am</span>
+                        <span class="tag">goofy cats</span>
+                        <span class="tag">reading manhwa, manga, manhua</span>
+                        <span class="tag">watching anime</span>
+                        <span class="tag">games</span>
+                        <span class="tag">pretending life is a movie</span>
+                        <span class="tag">staring outside the car window dramatically</span>
+                        <span class="tag">collecting unnecessary screenshots</span>
+                        <span class="tag">saying "it is what it is" after the worst possible events</span>
+                    </div>
+                </div>
+
+                <!-- Do Not Interact -->
+                <div class="content-block">
+                    <div class="block-title">Do Not Interact With Me If</div>
+                    <ul class="warning-list">
+                        <li>you dry text</li>
+                        <li>you think "k" is a full conversation</li>
+                        <li>you follow just to unfollow later</li>
+                        <li>your humor expired years ago</li>
+                        <li>you act like an npc</li>
+                        <li>negative aura detected</li>
+                        <li>you can't survive pure stupidity</li>
+                        <li>you take everything seriously</li>
+                        <li>you type "hmm" and disappear</li>
+                        <li>you have beef with harmless silly activities</li>
+                    </ul>
+                </div>
+
+                <!-- Warning Effects -->
+                <div class="content-block">
+                    <div class="block-title">Warning: Interacting With Me May Cause</div>
+                    <ul class="effects-list">
+                        <li>random meme spam</li>
+                        <li>sleep schedule destruction</li>
+                        <li>excessive brainrot</li>
+                        <li>emotional damage from reels</li>
+                        <li>confusion</li>
+                        <li>attachment issues</li>
+                        <li>loss of remaining braincells</li>
+                    </ul>
+                </div>
+
+                <!-- Important Info -->
+                <div class="content-block">
+                    <div class="block-title">Important Information</div>
+                    <div class="info-grid">
+                        <div class="info-pill">probably hungry rn</div>
+                        <div class="info-pill">probably sleepy rn</div>
+                        <div class="info-pill">probably listening to music rn</div>
+                        <div class="info-pill">probably avoiding responsibilities rn</div>
+                    </div>
+                </div>
+
+                <!-- Fun Facts -->
+                <div class="content-block">
+                    <div class="block-title">Fun Facts</div>
+                    <ul class="simple-list">
+                        <li>my attention span got kidnapped</li>
+                        <li>my motivation left the server</li>
+                        <li>my humor is beyond repair</li>
+                        <li>my brain runs on low battery mode</li>
+                        <li>my life is basically side quests</li>
+                        <li>i have mastered the art of doing absolutely nothing</li>
+                    </ul>
+                </div>
+
+                <!-- Quotes -->
+                <div class="content-block">
+                    <div class="block-title">Quote Of The Day</div>
+                    <div class="quote-box">"we ball" even when emotionally cooked</div>
+                    <div class="quote-box">"don't follow me on Instagram just to unfollow later" that's genuinely villain behavior</div>
+                </div>
+
+                <!-- Achievement -->
+                <div class="content-block">
+                    <div class="achievement-box">
+                        <div class="ach-title">ACHIEVEMENT UNLOCKED</div>
+                        <div class="ach-desc">you wasted your time reading this entire thing</div>
+                    </div>
+                </div>
+
+                <!-- Photo Gallery -->
+                <div class="content-block">
+                    <button class="gallery-toggle" onclick="toggleGallery(this)">
+                        <span>photo gallery</span>
+                        <span class="arrow">v</span>
+                    </button>
+                    <div class="gallery-content" id="galleryContent">
+                        <div class="photo-grid">
+                            <img src="keze_assets/1_Movie_Camera_Aesthetic_These_Vintage.png" alt="gallery" onclick="openLightbox(this.src)">
+                            <img src="keze_assets/2_DARK_ACADEMIA_Aesthetic_A_Deep_Dive.png" alt="gallery" onclick="openLightbox(this.src)">
+                            <img src="keze_assets/3_How_to_Get_The_Dark_and_Moody_Photography.png" alt="gallery" onclick="openLightbox(this.src)">
+                            <img src="keze_assets/4_Aesthetic_Minimalism_vs_Lifestyle.png" alt="gallery" onclick="openLightbox(this.src)">
+                            <img src="keze_assets/5_Old_Film_Cameras_Vintage_Video_Camera.png" alt="gallery" onclick="openLightbox(this.src)">
+                            <img src="keze_assets/6_Dark_Academia_Aesthetic_How_to_Bring.png" alt="gallery" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact -->
+                <div class="content-block" id="contact">
+                    <div class="block-title">Contact</div>
+                    <p class="intro-text" style="margin-bottom:0">
+                        anyways thanks for visiting this goofy ahh website. take care lil bro.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="page-footer">
+        made with questionable decisions and too much caffeine
+    </div>
+
+    <!-- Lightbox -->
+    <div
