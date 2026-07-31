@@ -584,4 +584,25 @@
     </div>
 
     <!-- Lightbox -->
-    <div
+<div id="lightbox" onclick="closeLightbox()">
+    <img id="lightboxImg" src="" alt="Preview">
+</div>
+
+<script>
+function toggleGallery(button) {
+    button.classList.toggle("active");
+    document.getElementById("galleryContent").classList.toggle("open");
+}
+
+function openLightbox(src) {
+    document.getElementById("lightboxImg").src = src;
+    document.getElementById("lightbox").style.display = "flex";
+}
+
+function closeLightbox() {
+    document.getElementById("lightbox").style.display = "none";
+}
+</script>
+
+</body>
+</html>
